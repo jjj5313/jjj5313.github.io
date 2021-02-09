@@ -1740,41 +1740,17 @@ pre code {
 .back-to-top {
   font-size: 12px;
 }
-.back-to-top span {
-  display: none;
-}
 .back-to-top {
-  bottom: -100px;
-  box-sizing: border-box;
-  color: #fff;
-  padding: 0 6px;
-  transition: bottom 0.2s ease-in-out;
-  background: #222;
-  cursor: pointer;
-  opacity: 0.6;
-  position: fixed;
-  z-index: 1300;
-  right: 30px;
-  width: 24px;
-}
-@media (max-width: 991px) {
-  .back-to-top {
-    right: 20px;
-  }
-}
-.back-to-top:hover {
-  opacity: 0.8;
-}
-@media (max-width: 991px) {
-  .back-to-top {
-    opacity: 0.8;
-  }
-}
-.back-to-top:hover {
-  color: #fc6423;
+  margin: 8px -10px -20px;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
 }
 .back-to-top.back-to-top-on {
-  bottom: 30px;
+  cursor: pointer;
+  opacity: 0.6;
+}
+.back-to-top.back-to-top-on:hover {
+  opacity: 0.8;
 }
 .noscript-warning {
   background-color: #f55;
@@ -2754,6 +2730,13 @@ ul.breadcrumb li:last-child {
 .links-of-author-item span.exturl:hover {
   background: var(--body-bg-color);
 }
+.back-to-top {
+  background: var(--body-bg-color);
+  margin: -4px -10px -18px;
+}
+.back-to-top.back-to-top-on {
+  margin-top: 16px;
+}
 .main-inner > .sub-menu,
 .main-inner > .post-block,
 .main-inner > .tabs-comment,
@@ -2835,6 +2818,130 @@ ul.breadcrumb li:last-child {
   .comments {
     padding: 10px 12px;
   }
+}
+#CloudCalendar {
+/*全句背景色*/
+  background-color: #eee;
+}
+#CloudCalendar a {
+  text-decoration: none;
+}
+.cal-head {
+  position: relative;
+  height: 20px;
+  padding: 8px 6px 2px 6px;
+}
+.cal-prev,
+.cal-next {
+  position: absolute;
+  top: 9px;
+  width: 9px;
+  height: 10px;
+  padding: 3px 4px;
+  border: 1px solid transparent;
+  color: #fff;
+  outline: 0;
+}
+/*上下页箭头*/
+.cal-prev {
+  left: 8px;
+}
+.cal-prev:before {
+  border-right: 9px solid #333;
+}
+.cal-next {
+  right: 8px;
+}
+.cal-next:before {
+  border-left: 9px solid #333;
+}
+.cal-prev:before,
+.cal-next:before {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+}
+.cal-title {
+  width: 120px;
+  margin: 0 auto;
+  color: #808080;
+  font: bold 14px/18px Arial;
+  text-align: center;
+}
+.cal-title a {
+  border: 1px solid transparent;
+/*年份颜色*/
+  color: color-link;
+}
+.cal,
+.cal th,
+.cal td {
+  border: 1px solid #eee;
+}
+.cal {
+  border-collapse: separate;
+  border-spacing: 0;
+  border-width: 1px 0 0 1px;
+  table-layout: fixed;
+  width: 100%;
+  margin: 0;
+}
+.cal th {
+/*星期颜色*/
+  color: color-link;
+  border-width: 0 1px 1px 0;
+  font-weight: 700;
+}
+.cal td {
+  border-width: 0 1px 1px 0;
+}
+.cal tbody a {
+/*有提交的天*/
+  background-color: #baf786;
+  color: #fff;
+  display: block;
+  border-bottom: 0px solid transparent;
+  font-weight: 700;
+}
+.cal tbody .cal-today {
+/*今天*/
+  color: #a722ff;
+  font-weight: bold;
+}
+.cal .cal-gray {
+/*没提交的天*/
+  color: #808080;
+}
+.cal th,
+.cal td {
+  font-weight: normal;
+  line-height: 2.5625;
+  padding: 0;
+  text-align: center;
+}
+.cal .cal-foot {
+/*底栏箭头切换月*/
+  color: color-link;
+}
+.cal-title a:hover,
+.cal-prev:hover,
+.cal-next:hover,
+.cal .cal-foot:hover,
+.cal .cal-foot:focus {
+/*底栏箭头切换月-鼠标覆盖*/
+  background-color: color-link;
+  color: #fff;
+  cursor: pointer;
+}
+/*鼠标覆盖后的颜色*/
+.cal tbody a:hover,
+.cal tbody a:focus {
+  background-color: #68dc6e;
+  color: #fff;
+  cursor: pointer;
 }
 </style><noscript>
   <style>
@@ -2968,8 +3075,15 @@ ul.breadcrumb li:last-child {
   </div>
 
 
-
+<!-- CloudCalendar -->
+<div class="widget-wrap" style="width: 90%;margin-left: auto;margin-right: auto; opacity: 0.97;">
+	<div class="widget" id="CloudCalendar"></div>
+</div>
       </section>
+        <div class="back-to-top animated">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
     </div>
   </aside>
   <div class="sidebar-dimmer"></div>
@@ -2978,10 +3092,6 @@ ul.breadcrumb li:last-child {
     </header>
 
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
 
 <noscript>
   <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
@@ -3093,11 +3203,11 @@ ul.breadcrumb li:last-child {
 
           <div class="post-nav">
             <div class="post-nav-item">
+                <a href="/2021/02/04/Sumo_Rank/" rel="prev" title="相扑力士位阶">
+                  <i class="fa fa-chevron-left"></i> 相扑力士位阶
+                </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2021/02/04/Sumo_Rank/" rel="next" title="相扑力士位阶">
-                  相扑力士位阶 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
@@ -3188,6 +3298,12 @@ ul.breadcrumb li:last-child {
   
 
   
+<!-- calendar widget -->
+
+    <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-calendar/calendar.min.js"></script>
+    <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-calendar/languages.min.js"></script>
+    
+
 
 
 
@@ -3199,4 +3315,16 @@ ul.breadcrumb li:last-child {
       var s = document.getElementsByTagName("script")[0];
       s.parentNode.insertBefore(bp, s);
     })();
-  </script></body></html>
+  ;
+
+    $(function() {
+        $('#CloudCalendar').aCalendar('zh-CN',
+            $.extend(
+                '', {
+                    single:true,
+                    root:'/calendar/'
+                }
+            )
+        );
+    });
+    </script></body></html>
